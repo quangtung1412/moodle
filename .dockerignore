@@ -1,0 +1,45 @@
+# Git files
+.git
+.gitignore
+.gitattributes
+
+# Docker files
+docker-compose.yml
+Dockerfile
+.dockerignore
+
+# Node modules
+node_modules
+npm-debug.log
+
+# IDE files
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Moodle specific
+moodledata/
+*.lock
+
+# Build files
+vendor/
+composer.lock
+
+# Documentation
+*.md
+CONTRIBUTING.md
+README.md
+UPGRADING.md
+INSTALL.txt
+COPYING.txt
+TRADEMARK.txt
