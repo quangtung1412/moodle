@@ -38310,6 +38310,10 @@ p.arrow_button {
   display: none;
 }
 
+.path-grade .groupsearchdropdown.dropdown-menu {
+  width: 400px;
+}
+
 .search-widget .dropdown-menu {
   padding: 0.8rem 1.2rem;
 }
@@ -38674,7 +38678,7 @@ body {
   height: max(80px, 1rem * 3);
   bottom: calc(max(80px, 1rem * 3) * -1);
   transition: bottom 0.5s;
-  z-index: 1020;
+  z-index: 3;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.15);
   font-size: calc(1rem * 1.10);
 }
@@ -39519,7 +39523,6 @@ body.tox-fullscreen .tox.tox-tinymce-aux {
   .hasstickyfooter .drawer-left,
   .hasstickyfooter .drawer-right {
     top: 60px;
-    height: calc(100vh - 60px - max(80px, 1rem * 3));
   }
   #page.drawers {
     position: relative;
