@@ -1,0 +1,65 @@
+# Git
+.git
+.gitignore
+.github
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+DOCKER_README.md
+
+# Documentation
+README.md
+CONTRIBUTING.md
+INSTALL.txt
+UPGRADING.md
+TRADEMARK.txt
+COPYING.txt
+
+# Node modules (will be installed in container if needed)
+node_modules
+npm-debug.log
+
+# Development files
+.editorconfig
+.eslintrc
+.stylelintrc
+phpcs.xml.dist
+phpunit.xml.dist
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Config files (will be created during installation)
+config.php
+
+# Environment files
+.env.local
+.env.*.local
+
+# Cache and temporary files
+public/cache
+public/localcache
+public/sessions
+public/temp
+public/trashdir
+
+# Moodle data directory
+moodledata
+
+# Vendor (will be installed via composer if needed)
+vendor
+
+# Test files
+.phpunit.result.cache
+behat.yml

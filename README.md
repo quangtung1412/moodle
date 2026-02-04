@@ -30,6 +30,40 @@ Moodle is Free, and Open Source software. You can easily [download Moodle][9] an
 
 Moodle also offers hosting through both [MoodleCloud][11], and our [partner network][10].
 
+### 🐳 Docker Installation (Recommended for Development)
+
+For quick setup with Docker:
+
+```bash
+# Clone the repository (if not already done)
+git clone -b MOODLE_501_STABLE git://git.moodle.org/moodle.git
+cd moodle
+
+# Start with Docker Compose
+docker-compose up -d --build
+
+# Wait 10-15 minutes for automatic installation
+docker-compose logs -f moodle
+
+# Access Moodle at http://localhost:9000
+# Default credentials: admin / Admin@123
+```
+
+**See detailed guides:**
+- [QUICKSTART.md](QUICKSTART.md) - Get started in 5 minutes
+- [DOCKER_README.md](DOCKER_README.md) - Complete documentation
+- [.env.production.example](.env.production.example) - Production deployment
+
+**Features:**
+- ✅ Automatic installation via CLI
+- ✅ MySQL 8.4 with optimal configuration
+- ✅ PHP 8.2 with all required extensions
+- ✅ Cron job running every minute
+- ✅ MailHog for email testing
+- ✅ phpMyAdmin for database management
+- ✅ Security best practices (code not writable by web server)
+- ✅ Proper directory structure (Moodle 5.1+ with /public)
+
 ## License
 
 Moodle is provided freely as open source software, under version 3 of the GNU General Public License. For more information on our license see
