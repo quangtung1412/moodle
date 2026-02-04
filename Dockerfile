@@ -40,7 +40,8 @@ RUN apt-get update && apt-get install -y \
 # Required: iconv, mbstring, curl, openssl, ctype, zip, zlib, gd, 
 # simplexml, spl, pcre, dom, xml, xmlreader, intl, json, hash, fileinfo, sodium
 # Suggested: mysqli (MySQL), exif, soap
-# Recommended: xmlrpc (web services), ldap (LDAP auth)
+# Recommended: ldap (LDAP auth)
+# Note: xmlrpc removed from PHP 8.0+, moved to PECL
 RUN docker-php-ext-configure intl && \
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-configure ldap && \
@@ -56,7 +57,6 @@ RUN docker-php-ext-configure intl && \
         exif \
         soap \
         opcache \
-        xmlrpc \
         ldap
 
 # Note: Built-in extensions (already enabled): 
