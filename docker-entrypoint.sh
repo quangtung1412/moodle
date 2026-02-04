@@ -7,7 +7,7 @@ echo "=========================================="
 
 # Wait for database to be ready
 echo "Waiting for database to be ready..."
-until mysql -h"${MOODLE_DATABASE_HOST}" -u"${MOODLE_DATABASE_USER}" -p"${MOODLE_DATABASE_PASSWORD}" -e "SELECT 1" &>/dev/null; do
+until mysql -h"${MOODLE_DATABASE_HOST}" -P"${MOODLE_DATABASE_PORT}" -u"${MOODLE_DATABASE_USER}" -p"${MOODLE_DATABASE_PASSWORD}" "${MOODLE_DATABASE_NAME}" -e "SELECT 1" &>/dev/null; do
     echo "Database not ready yet, waiting..."
     sleep 3
 done

@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     msmtp \
     msmtp-mta \
+    default-mysql-client \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Node.js 22.x (required by package.json: >=22.11.0 <23)
