@@ -11,7 +11,8 @@ MAX_RETRIES=60
 RETRY_COUNT=0
 
 while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
-    if mysql -h"${MOODLE_DATABASE_HOST}" -P"${MOODLE_DATABASE_PORT:-3306}" -u"${MOODLE_DATABASE_USER}" -p"${MOODLE_DATABASE_PASSWORD}" "${MOODLE_DATABASE_NAME}" -e "SELECT 1" 2>/dev/null; then
+    # Try using mysqladmin ping which is more reliable
+    if mysqladmin ping -h"${MOODLE_DATABASE_HOST}" -P"${MOODLE_DATABASE_PORT:-3306}" -u"${MOODLE_DATABASE_USER}" -p"${MOODLE_DATABASE_PASSWORD}" --silent 2>/dev/null; then
         echo "Database is ready!"
         break
     fi
@@ -26,6 +27,12 @@ if [ $RETRY_COUNT -eq $MAX_RETRIES ]; then
     echo "  - MySQL container is running: docker compose logs mysql"
     echo "  - Database credentials are correct"
     echo "  - Network connectivity between containers"
+    echo ""
+    echo "Debug information:"
+    echo "  Host: ${MOODLE_DATABASE_HOST}"
+    echo "  Port: ${MOODLE_DATABASE_PORT:-3306}"
+    echo "  User: ${MOODLE_DATABASE_USER}"
+    echo "  Database: ${MOODLE_DATABASE_NAME}"
     exit 1
 fi
 
