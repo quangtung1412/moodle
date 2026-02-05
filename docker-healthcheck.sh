@@ -15,13 +15,13 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-# Check if docker-compose is running
+# Check if docker compose is running
 echo "1. Checking Docker Compose services..."
-if docker-compose ps | grep -q "Up"; then
+if docker compose ps | grep -q "Up\|running"; then
     echo -e "${GREEN}✓${NC} Docker Compose services are running"
 else
     echo -e "${RED}✗${NC} Docker Compose services are not running"
-    echo "   Run: docker-compose up -d"
+    echo "   Run: docker compose up -d"
     exit 1
 fi
 echo ""
@@ -102,7 +102,7 @@ if curl -f -s -o /dev/null http://localhost:9000/; then
 else
     echo -e "${RED}✗${NC} Cannot access Moodle at http://localhost:9000"
     echo "   Wait a few minutes and try again"
-    echo "   Check logs: docker-compose logs moodle"
+    echo "   Check logs: docker compose logs moodle"
 fi
 echo ""
 
@@ -143,10 +143,10 @@ echo "  phpMyAdmin:  http://localhost:9002"
 echo "  MailHog:     http://localhost:9003"
 echo ""
 echo "Useful commands:"
-echo "  View logs:        docker-compose logs -f moodle"
+echo "  View logs:        docker compose logs -f moodle"
 echo "  Shell access:     docker exec -it moodle_app bash"
-echo "  Restart:          docker-compose restart"
-echo "  Stop:             docker-compose down"
+echo "  Restart:          docker compose restart"
+echo "  Stop:             docker compose down"
 echo ""
 echo "For more help, see DOCKER_README.md"
 echo "=========================================="

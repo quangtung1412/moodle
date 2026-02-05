@@ -102,7 +102,7 @@ Moodle WWW Root: ${MOODLE_WWWROOT:-Not set}
 
 Docker Containers:
 ------------------
-$(docker-compose ps)
+$(docker compose ps)
 
 Database Tables:
 ----------------
@@ -113,13 +113,13 @@ Restore Instructions:
 To restore this backup:
 
 1. Stop containers:
-   docker-compose down
+   docker compose down
 
 2. Remove old volumes (WARNING: destroys current data):
    docker volume rm moodle_mysql_data moodle_moodle_data
 
 3. Start containers:
-   docker-compose up -d
+   docker compose up -d
 
 4. Wait for MySQL to be ready:
    sleep 30
@@ -138,7 +138,7 @@ To restore this backup:
    docker exec $MOODLE_CONTAINER chmod -R 0770 /var/www/moodledata
 
 9. Restart:
-   docker-compose restart
+   docker compose restart
 EOF
 
 echo "   Backup info saved to: $INFO_FILE"

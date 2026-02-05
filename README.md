@@ -40,10 +40,10 @@ git clone -b MOODLE_501_STABLE git://git.moodle.org/moodle.git
 cd moodle
 
 # Start with Docker Compose
-docker-compose up -d --build
+docker compose up -d --build
 
 # Wait 10-15 minutes for automatic installation
-docker-compose logs -f moodle
+docker compose logs -f moodle
 
 # Access Moodle at http://localhost:9000
 # Default credentials: admin / Admin@123

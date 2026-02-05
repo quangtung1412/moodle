@@ -101,8 +101,8 @@
 
 1. **Quick start (automatic):**
    ```bash
-   docker-compose up -d --build
-   docker-compose logs -f moodle
+   docker compose up -d --build
+   docker compose logs -f moodle
    # Wait 10-15 minutes
    # Access: http://localhost:9000
    # Login: admin / Admin@123
@@ -122,7 +122,7 @@ bash docker-healthcheck.sh
 
 **View logs:**
 ```bash
-docker-compose logs -f moodle
+docker compose logs -f moodle
 ```
 
 **Backup:**
@@ -139,8 +139,8 @@ bash docker-restore.sh 20260204_143000
 
 1. Check [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
 2. Run health check: `bash docker-healthcheck.sh`
-3. Check logs: `docker-compose logs -f`
-4. See specific service logs: `docker-compose logs mysql`
+3. Check logs: `docker compose logs -f`
+4. See specific service logs: `docker compose logs mysql`
 
 ### Production Deployment
 
@@ -185,19 +185,19 @@ bash docker-restore.sh 20260204_143000
 
 ```bash
 # Start
-docker-compose up -d
+docker compose up -d
 
 # Stop
-docker-compose down
+docker compose down
 
 # Restart
-docker-compose restart
+docker compose restart
 
 # Logs (all)
-docker-compose logs -f
+docker compose logs -f
 
 # Logs (Moodle only)
-docker-compose logs -f moodle
+docker compose logs -f moodle
 
 # Shell access
 docker exec -it moodle_app bash
@@ -212,11 +212,11 @@ bash docker-backup.sh
 bash docker-restore.sh TIMESTAMP
 
 # Rebuild
-docker-compose up -d --build --force-recreate
+docker compose up -d --build --force-recreate
 
 # Nuclear option (deletes everything!)
-docker-compose down -v
-docker-compose up -d --build
+docker compose down -v
+docker compose up -d --build
 ```
 
 ### Moodle CLI Commands

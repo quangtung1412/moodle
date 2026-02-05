@@ -11,7 +11,7 @@ cd /path/to/moodle
 ### Bước 2: Start Docker containers
 
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 **Chờ 10-15 phút để:**
@@ -23,7 +23,7 @@ docker-compose up -d --build
 ### Bước 3: Theo dõi quá trình cài đặt
 
 ```bash
-docker-compose logs -f moodle
+docker compose logs -f moodle
 ```
 
 Đợi cho đến khi thấy:
@@ -54,7 +54,7 @@ Mở trình duyệt: **http://localhost:9000**
 
 ## ⚙️ Cấu hình (Optional)
 
-Chỉnh sửa file `.env` TRƯỚC KHI chạy `docker-compose up`:
+Chỉnh sửa file `.env` TRƯỚC KHI chạy `docker compose up`:
 
 ```env
 # Đổi mật khẩu
@@ -78,16 +78,16 @@ Xem [DOCKER_README.md](DOCKER_README.md) để biết:
 
 ```bash
 # Stop (giữ data)
-docker-compose down
+docker compose down
 
 # Stop và xóa TẤT CẢ (including data)
-docker-compose down -v
+docker compose down -v
 ```
 
 ## 🔄 Restart
 
 ```bash
-docker-compose restart
+docker compose restart
 ```
 
 ## 📋 Requirements

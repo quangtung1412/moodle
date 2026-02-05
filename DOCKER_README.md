@@ -63,7 +63,7 @@ MOODLE_ADMIN_EMAIL=admin@example.com
 ### Bước 3: Khởi động hệ thống
 
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 **Lần đầu tiên sẽ mất 10-15 phút để:**
@@ -78,7 +78,7 @@ docker-compose up -d --build
 ### Bước 4: Theo dõi quá trình cài đặt
 
 ```bash
-docker-compose logs -f moodle
+docker compose logs -f moodle
 ```
 
 Bạn sẽ thấy:
@@ -126,7 +126,7 @@ Xóa hoặc comment các biến môi trường admin trong `.env`:
 ### Bước 2: Khởi động containers
 
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 ### Bước 3: Truy cập Web GUI
@@ -305,40 +305,40 @@ docker exec moodle_app ls -la /var/www/moodledata
 ### Xem logs
 ```bash
 # Tất cả services
-docker-compose logs -f
+docker compose logs -f
 
 # Chỉ Moodle
-docker-compose logs -f moodle
+docker compose logs -f moodle
 
 # Chỉ MySQL
-docker-compose logs -f mysql
+docker compose logs -f mysql
 ```
 
 ### Dừng containers
 ```bash
-docker-compose stop
+docker compose stop
 ```
 
 ### Khởi động lại
 ```bash
-docker-compose restart
+docker compose restart
 ```
 
 ### Dừng và xóa containers (GIỮ dữ liệu)
 ```bash
-docker-compose down
+docker compose down
 ```
 
 ### Dừng và XÓA TẤT CẢ (bao gồm database)
 ```bash
-docker-compose down -v
+docker compose down -v
 ```
 
 ### Rebuild từ đầu
 ```bash
-docker-compose down
-docker-compose build --no-cache
-docker-compose up -d
+docker compose down
+docker compose build --no-cache
+docker compose up -d
 ```
 
 ### Truy cập shell trong container
@@ -383,15 +383,15 @@ moodle/
 
 ```bash
 # Kiểm tra logs
-docker-compose logs moodle
-docker-compose logs mysql
+docker compose logs moodle
+docker compose logs mysql
 
 # Kiểm tra status
-docker-compose ps
+docker compose ps
 
 # Rebuild từ đầu
-docker-compose down
-docker-compose up -d --build
+docker compose down
+docker compose up -d --build
 ```
 
 ### Database connection failed
@@ -406,13 +406,13 @@ docker-compose up -d --build
 **Giải pháp:**
 ```bash
 # Kiểm tra MySQL health
-docker-compose ps mysql
+docker compose ps mysql
 
 # Test connection từ Moodle container
 docker exec -it moodle_app mysql -h mysql -u moodleuser -pmoodlepassword -e "SELECT 1"
 
 # Xem MySQL logs
-docker-compose logs mysql | tail -50
+docker compose logs mysql | tail -50
 ```
 
 ### Data directory not writable
@@ -434,13 +434,13 @@ docker exec -it moodle_app ls -la /var/www/ | grep moodledata
 **Giải pháp:**
 ```bash
 # Stop containers
-docker-compose down
+docker compose down
 
 # Remove volumes (XÓA TẤT CẢ DỮ LIỆU!)
-docker-compose down -v
+docker compose down -v
 
 # Start fresh
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 ### Cron không chạy
@@ -665,7 +665,7 @@ volumes:
 
 Deploy:
 ```bash
-docker-compose -f docker-compose.yml -f docker-compose.production.yml up -d
+docker compose -f docker-compose.yml -f docker-compose.production.yml up -d
 ```
 
 ## Requirements đã được đáp ứng (theo Installation Quick Guide)
@@ -795,34 +795,34 @@ docker exec -it moodle_app php /var/www/html/public/admin/cli/reset_password.php
 
 ```bash
 # View logs (real-time)
-docker-compose logs -f moodle
+docker compose logs -f moodle
 
 # View logs (last 100 lines)
-docker-compose logs --tail=100 moodle
+docker compose logs --tail=100 moodle
 
 # Shell into container
 docker exec -it moodle_app bash
 
 # Check container status
-docker-compose ps
+docker compose ps
 
 # Restart services
-docker-compose restart
+docker compose restart
 
 # Stop services
-docker-compose stop
+docker compose stop
 
 # Start services
-docker-compose start
+docker compose start
 
 # Remove containers (keep data)
-docker-compose down
+docker compose down
 
 # Remove everything including volumes (DATA LOSS!)
-docker-compose down -v
+docker compose down -v
 
 # Rebuild and restart
-docker-compose up -d --build --force-recreate
+docker compose up -d --build --force-recreate
 
 # View resource usage
 docker stats moodle_app
@@ -884,7 +884,7 @@ docker inspect moodle_app
 - ✅ Set proper `MOODLE_WWWROOT` với domain thật
 - ✅ Enable opcache và performance tuning
 - ✅ Regular backups (database + moodledata)
-- ✅ Monitor logs: `docker-compose logs -f`
+- ✅ Monitor logs: `docker compose logs -f`
 - ✅ Set resource limits trong docker-compose.yml
 - ✅ Use Docker secrets cho sensitive data
 
@@ -895,7 +895,7 @@ docker inspect moodle_app
 - ✅ Keep Docker images updated
 - ✅ Don't expose MySQL port (9001) in production
 - ✅ Use firewalls và security groups
-- ✅ Regular security updates: `docker-compose pull && docker-compose up -d`
+- ✅ Regular security updates: `docker compose pull && docker compose up -d`
 
 ## Tham khảo
 

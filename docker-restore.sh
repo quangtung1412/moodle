@@ -86,12 +86,12 @@ echo ""
 
 # Step 2: Stop containers
 echo "2. Stopping containers..."
-docker-compose stop
+docker compose stop
 echo ""
 
 # Step 3: Start MySQL only
 echo "3. Starting MySQL..."
-docker-compose up -d mysql
+docker compose up -d mysql
 
 echo "   Waiting for MySQL to be ready..."
 sleep 10
@@ -127,7 +127,7 @@ echo ""
 
 # Step 6: Start Moodle container
 echo "6. Starting Moodle container..."
-docker-compose up -d moodle
+docker compose up -d moodle
 echo "   Waiting for Moodle to be ready..."
 sleep 15
 echo ""
@@ -175,7 +175,7 @@ echo ""
 
 # Step 12: Restart all services
 echo "12. Restarting all services..."
-docker-compose restart
+docker compose restart
 echo ""
 
 echo "   Waiting for services to be ready..."
@@ -194,7 +194,7 @@ if curl -f -s -o /dev/null http://localhost:9000/; then
     echo "✓ Moodle is accessible at http://localhost:9000"
 else
     echo "✗ Warning: Cannot access Moodle at http://localhost:9000"
-    echo "  Check logs: docker-compose logs moodle"
+    echo "  Check logs: docker compose logs moodle"
 fi
 
 # Check database
@@ -216,6 +216,6 @@ echo "3. Verify files and courses are intact"
 echo "4. Run scheduled tasks: docker exec moodle_app php /var/www/html/public/admin/cli/cron.php"
 echo ""
 echo "If you encounter issues, check logs:"
-echo "  docker-compose logs -f moodle"
+echo "  docker compose logs -f moodle"
 echo ""
 echo "=========================================="

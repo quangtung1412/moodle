@@ -7,11 +7,27 @@ echo "=========================================="
 
 # Wait for database to be ready
 echo "Waiting for database to be ready..."
-until mysql -h"${MOODLE_DATABASE_HOST}" -P"${MOODLE_DATABASE_PORT}" -u"${MOODLE_DATABASE_USER}" -p"${MOODLE_DATABASE_PASSWORD}" "${MOODLE_DATABASE_NAME}" -e "SELECT 1" &>/dev/null; do
-    echo "Database not ready yet, waiting..."
+MAX_RETRIES=60
+RETRY_COUNT=0
+
+while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+    if mysql -h"${MOODLE_DATABASE_HOST}" -P"${MOODLE_DATABASE_PORT:-3306}" -u"${MOODLE_DATABASE_USER}" -p"${MOODLE_DATABASE_PASSWORD}" "${MOODLE_DATABASE_NAME}" -e "SELECT 1" 2>/dev/null; then
+        echo "Database is ready!"
+        break
+    fi
+    RETRY_COUNT=$((RETRY_COUNT + 1))
+    echo "Database not ready yet, waiting... (attempt $RETRY_COUNT/$MAX_RETRIES)"
     sleep 3
 done
-echo "Database is ready!"
+
+if [ $RETRY_COUNT -eq $MAX_RETRIES ]; then
+    echo "ERROR: Could not connect to database after $MAX_RETRIES attempts!"
+    echo "Please check:"
+    echo "  - MySQL container is running: docker compose logs mysql"
+    echo "  - Database credentials are correct"
+    echo "  - Network connectivity between containers"
+    exit 1
+fi
 
 # Set proper permissions for moodledata
 echo "Setting permissions for moodledata directory..."

@@ -13,7 +13,7 @@ This will check all services and report any issues.
 ### 2. Check container status
 
 ```bash
-docker-compose ps
+docker compose ps
 ```
 
 All services should show "Up" and "healthy".
@@ -22,16 +22,16 @@ All services should show "Up" and "healthy".
 
 ```bash
 # All services
-docker-compose logs -f
+docker compose logs -f
 
 # Just Moodle
-docker-compose logs -f moodle
+docker compose logs -f moodle
 
 # Just MySQL
-docker-compose logs -f mysql
+docker compose logs -f mysql
 
 # Last 100 lines
-docker-compose logs --tail=100 moodle
+docker compose logs --tail=100 moodle
 ```
 
 ## Common Issues
@@ -53,12 +53,12 @@ docker-compose logs --tail=100 moodle
 
 ```bash
 # 1. Check MySQL is running and healthy
-docker-compose ps mysql
+docker compose ps mysql
 
 # Should show: Up (healthy)
 
 # 2. Check MySQL logs
-docker-compose logs mysql | tail -50
+docker compose logs mysql | tail -50
 
 # 3. Test database connection from Moodle container
 docker exec -it moodle_app mysql -h mysql -u moodleuser -pmoodlepassword -e "SELECT 1"
@@ -71,9 +71,9 @@ cat .env | grep MYSQL
 # 5. If using manual installation via web, make sure hostname is "mysql" not "localhost"
 
 # 6. Restart services
-docker-compose restart mysql
+docker compose restart mysql
 sleep 10
-docker-compose restart moodle
+docker compose restart moodle
 ```
 
 ### Issue: "Data directory is not writable"
@@ -114,11 +114,11 @@ docker exec -it moodle_app ls -la /var/www/ | grep moodledata
 docker system df
 
 # 3. Restart installation from scratch
-docker-compose down -v
-docker-compose up -d --build
+docker compose down -v
+docker compose up -d --build
 
 # 4. Watch logs for errors
-docker-compose logs -f moodle
+docker compose logs -f moodle
 ```
 
 ### Issue: "Port already in use"
@@ -176,7 +176,7 @@ docker exec -it moodle_app php /var/www/html/public/admin/cli/cron.php
 docker exec -it moodle_app tail -100 /var/log/syslog | grep CRON
 
 # 5. Restart container
-docker-compose restart moodle
+docker compose restart moodle
 ```
 
 ### Issue: "config.php not found or incorrect"
@@ -204,7 +204,7 @@ docker exec -it moodle_app grep "dbhost\|dbname\|dbuser" /var/www/html/config.ph
 
 # 4. Recreate config.php
 docker exec -it moodle_app rm /var/www/html/config.php
-docker-compose restart moodle
+docker compose restart moodle
 # Wait for entrypoint to recreate it
 ```
 
@@ -219,7 +219,7 @@ docker-compose restart moodle
 
 ```bash
 # 1. Check MailHog is running
-docker-compose ps mailhog
+docker compose ps mailhog
 
 # 2. Access MailHog UI
 # Open: http://localhost:9003
@@ -262,7 +262,7 @@ EOF
 exit
 
 # 2. Check Apache error logs
-docker-compose logs moodle | grep -i error
+docker compose logs moodle | grep -i error
 
 # 3. Check PHP error logs
 docker exec -it moodle_app tail -100 /var/log/php_errors.log
@@ -275,7 +275,7 @@ docker exec -it moodle_app ls -la /var/www/html/config.php
 docker exec -it moodle_app php /var/www/html/public/admin/cli/purge_caches.php
 
 # 6. Restart Apache
-docker-compose restart moodle
+docker compose restart moodle
 ```
 
 ### Issue: "Performance is very slow"
@@ -304,7 +304,7 @@ docker stats moodle_app
 echo 'memory_limit = 1024M';
 
 # Rebuild:
-docker-compose up -d --build
+docker compose up -d --build
 
 # 4. Check if using bind mount in production
 # For production, don't mount source code
@@ -343,10 +343,10 @@ netsh advfirewall firewall add rule name="Moodle Docker" dir=in action=allow pro
 MOODLE_WWWROOT=http://192.168.1.100:9000
 
 # 3. Restart Moodle
-docker-compose restart moodle
+docker compose restart moodle
 
 # 4. Verify Docker port binding
-docker-compose ps
+docker compose ps
 # Should show: 0.0.0.0:9000->80/tcp
 
 # 5. Test from other computer
@@ -362,7 +362,7 @@ If all else fails, start completely fresh:
 # WARNING: This deletes ALL data including database!
 
 # 1. Stop and remove containers
-docker-compose down -v
+docker compose down -v
 
 # 2. Remove config.php if exists
 rm config.php
@@ -371,10 +371,10 @@ rm config.php
 docker system prune -a --volumes
 
 # 4. Start fresh
-docker-compose up -d --build
+docker compose up -d --build
 
 # 5. Watch installation
-docker-compose logs -f moodle
+docker compose logs -f moodle
 ```
 
 ## Getting Help
@@ -383,14 +383,14 @@ If you still have issues:
 
 1. **Check logs thoroughly:**
    ```bash
-   docker-compose logs --tail=500 moodle > moodle_logs.txt
-   docker-compose logs --tail=500 mysql > mysql_logs.txt
+   docker compose logs --tail=500 moodle > moodle_logs.txt
+   docker compose logs --tail=500 mysql > mysql_logs.txt
    ```
 
 2. **Verify environment:**
    ```bash
    docker version
-   docker-compose version
+   docker compose version
    cat .env
    ```
 
@@ -413,7 +413,7 @@ To avoid issues:
 
 - ✅ Always use `.env` file for configuration
 - ✅ Don't modify files inside running containers
-- ✅ Use docker-compose for all operations
+- ✅ Use `docker compose` for all operations
 - ✅ Regular backups before major changes
 - ✅ Keep Docker and images updated
 - ✅ Monitor logs regularly
